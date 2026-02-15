@@ -3,11 +3,11 @@
 **Assessment 2: Advanced Software Development (SWE7302)**
 
 ## 📋 Project Overview
-This repository contains the codebase for the **SmartHome Manager**, a legacy system designed to control household IoT devices.
+This repository contains the codebase for the **SmartHome Manager**, a system designed to control household IoT devices.
 
-Currently, the system operates as a functional prototype but exhibits high coupling and low cohesion. The purpose of this project is to serve as a **refactoring case study**. Over the course of development, this codebase will evolve from its current monolithic state into a modular, scalable architecture using industry-standard best practices.
+The project initially started as a legacy prototype with high coupling and low cohesion. It is currently undergoing a major refactoring process to evolve into a modular, scalable architecture. This transformation demonstrates the practical application of **Object-Oriented Analysis and Design (OOAD)** and **Design Patterns** to solve real-world architectural challenges.
 
-> **⚠️ Note:** The initial code in the `legacy` package contains intentional design flaws (violation of SOLID principles, hardcoded dependencies, etc.) to demonstrate the necessity and impact of proper software engineering techniques.
+
 
 ## 🚀 How to Run
 
@@ -28,27 +28,24 @@ Currently, the system operates as a functional prototype but exhibits high coupl
     mvn clean install
     ```
 
-3.  **Run the application**
+3.  **Run the application (Legacy Version)**
     ```bash
     mvn exec:java -Dexec.mainClass="com.smarthome.legacy.Main"
     ```
 
-## 🛠 Project Goals
-This repository tracks the journey of modernizing a legacy application. Key objectives include:
-* Identifying and remediating code smells.
-* Decoupling high-level policy from low-level implementation.
-* Demonstrating the practical application of Object-Oriented Analysis and Design (OOAD).
-* Integrating design patterns to solve specific architectural problems.
+## 🏗 Refactoring Progress & Patterns
+This section tracks the modernization of the codebase.
 
-## 📚 References
-The refactoring strategies applied in this project are based on concepts from:
-* *Clean Code* by Robert C. Martin
-* *Design Patterns: Elements of Reusable Object-Oriented Software* by Gamma et al.
-* *Refactoring* by Martin Fowler
+### ✅ Phase 1: Standardization & Adapter Pattern
+* **Goal:** Decouple the system from concrete legacy classes and fix interface incompatibility.
+* **Changes:**
+    * **Abstraction:** Introduced the `SmartDevice` interface to standardize behaviors (`turnOn`, `turnOff`, `getStatus`) across all devices.
+    * **Structural Pattern (Adapter):** Implemented `ThermostatAdapter` to wrap the incompatible `LegacyThermostat`. This allows the modern system to control legacy hardware (which uses Fahrenheit) using standard Celsius inputs, satisfying the **Open/Closed Principle**.
+
 
 ## 👤 Author
 **Amir Tavassoli**
-MSc Software Engineering | University of Bolton
+
 
 ## 📄 License
 This is an educational project created for portfolio and assessment purposes.
