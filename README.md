@@ -3,9 +3,7 @@
 **Assessment 2: Advanced Software Development (SWE7302)**
 
 ## 📋 Project Overview
-This repository contains the codebase for the **SmartHome Manager**, a system designed to control household IoT devices.
-
-The project initially started as a legacy prototype with high coupling and low cohesion. It is currently undergoing a major refactoring process to evolve into a modular, scalable architecture. This transformation demonstrates the practical application of **Object-Oriented Analysis and Design (OOAD)** and **Design Patterns** to solve real-world architectural challenges.
+SmartHome Manager is an educational project that demonstrates how to refactor poorly designed legacy code into a modern, maintainable architecture using design patterns and SOLID principles. It's like a "before and after" showcase of software evolution.
 
 ## 🚀 How to Run
 
@@ -47,7 +45,7 @@ This section tracks the modernization of the codebase.
 
 ### 🚧 Phase 2: Object Creation & Factory Pattern (In Progress)
 * **Goal:** Remove rigid dependencies (`new` keyword) from the client logic to improve scalability.
-* **Planned Changes:**
+* **Changes:**
     * **Creational Pattern (Factory Method):** Implement a factory layer to encapsulate device instantiation logic.
     * **Encapsulation:** Hide the complexity of Adapter creation from the main execution flow.
 

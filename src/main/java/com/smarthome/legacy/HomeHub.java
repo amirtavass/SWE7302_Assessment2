@@ -1,7 +1,7 @@
 package com.smarthome.legacy;
 
 public class HomeHub {
-    // Hardcoded dependencies - Bad Practice!
+
     public SmartLight livingRoomLight;
     public LegacyThermostat oldThermostat;
 
@@ -10,7 +10,7 @@ public class HomeHub {
         this.oldThermostat = new LegacyThermostat();
     }
 
-    // A monolithic method handling everything
+
     public void runSystem(String mode) {
         System.out.println("Running system in mode: " + mode);
 
