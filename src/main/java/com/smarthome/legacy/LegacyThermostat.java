@@ -11,4 +11,10 @@ public class LegacyThermostat {
     public double getTempFahrenheit() {
         return currentTempFahrenheit;
     }
+
+
+    public double calculateEnergyUsage() {
+
+        return (currentTempFahrenheit - 50) * 1.5;
+    }
 }
