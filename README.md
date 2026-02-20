@@ -1,59 +1,32 @@
-# SmartHome Manager 🏠 v2.1
+# StarScreen Ticket Manager 🍿 v1.0
 
 **Assessment 2: Advanced Software Development (SWE7302)**
 
 ## 📋 Project Overview
-SmartHome Manager is an educational project that demonstrates how to refactor poorly designed legacy code into a modern, maintainable architecture using design patterns and SOLID principles. It serves as a "before and after" showcase of software evolution.
+StarScreen Ticket Manager is an educational project that demonstrates how to refactor poorly designed legacy code into a modern, maintainable architecture using design patterns and SOLID principles.
 
-## 🚀 How to Run
+The original system was developed rapidly as a monolith. It manages movie formats, snack add-ons, and promotional discounts all within a single rigid class using fragile `if-else` chains. This project serves as a "before and after" showcase, refactoring the system into a modular architecture.
 
-### Prerequisites
-* **Java Development Kit (JDK):** Version 25 or higher
-* **Build Tool:** Maven
+### 🛑 The "Before" State: Legacy Code
+*(The following screenshot demonstrates the monolithic, tightly coupled nature of the original system, featuring hardcoded ticket creation, rigid add-on logic, and embedded discount rules before refactoring.)*
 
-### Installation & Execution
+![img.png](img.png)
 
-1.  **Clone the repository**
-    ```bash
-    git clone [https://github.com/amirtavass/SWE7302_Assessment2.git](https://github.com/amirtavass/SWE7302_Assessment2.git)
-    cd SmartHomeManager
-    ```
-
-2.  **Build the project**
-    ```bash
-    mvn clean install
-    ```
-
-3.  **Run the application**
-    * **Option A: Legacy System (The "Before" State)**
-        ```bash
-        mvn exec:java -Dexec.mainClass="com.smarthome.legacy.Main"
-        ```
-    * **Option B: Modern System (The "After" State)**
-        ```bash
-        mvn exec:java -Dexec.mainClass="com.smarthome.modern.ModernMain"
-        ```
 
 ## 🏗 Refactoring Progress & Patterns
 This section tracks the modernization of the codebase.
 
-### ✅ Phase 1: Standardization & Adapter Pattern (Completed)
-* **Goal:** Decouple the system from concrete legacy classes and fix interface incompatibility.
-* **Changes:**
-    * **Abstraction:** Introduced the `SmartDevice` interface to standardize behaviors (`turnOn`, `turnOff`, `getStatus`) across all devices.
-    * **Structural Pattern (Adapter):** Implemented `ThermostatAdapter` to wrap the incompatible `LegacyThermostat`. This allows the modern system to control legacy hardware (which uses Fahrenheit) using standard Celsius inputs.
+### 🚧 Phase 1: Ticket Instantiation & Factory Pattern (In Progress)
+* **Context:** The legacy `selectTicket` method uses hardcoded `if/else` logic to create standard or IMAX tickets.
+* **Goal:** Implement a **Creational Pattern (Factory Method)** to cleanly instantiate `ImaxTicket` or `StandardTicket` objects, removing rigid dependencies and adhering to the Open/Closed Principle.
 
-### ✅ Phase 2: Object Creation & Factory Pattern (Completed)
-* **Goal:** Remove rigid dependencies (`new` keyword) from the client logic to improve scalability.
-* **Changes:**
-    * **Creational Pattern (Factory Method):** Implemented a factory layer (`DeviceFactory`, `LightFactory`, `ThermostatFactory`) to encapsulate device instantiation logic.
-    * **Encapsulation:** The client code (`ModernMain`) no longer knows about the complex setup required for legacy adapters.
+### ⏳ Phase 2: Dynamic Add-ons & Decorator Pattern (Planned)
+* **Context:** The `addExtra` method relies on fragile string comparisons to add 3D glasses or popcorn. Adding new snacks risks a "class explosion" or massive conditional blocks.
+* **Goal:** Implement a **Structural Pattern (Decorator)**. Create a base `ITicket` interface and wrap it dynamically with `PopcornDecorator` or `GlassesDecorator` to calculate prices seamlessly.
 
-### 🚧 Phase 3: Logic Expansion & Behavioral Patterns (In Progress)
-* **Context:** The legacy `HomeHub` logic has been expanded to simulate a "God Class" problem. It currently relies on complex, monolithic `if/else` chains to manage system modes (e.g., "Eco", "Party", "Winter").
-* **Goal:** Refactor the hardcoded control logic into a flexible, plugin-based system.
-* **Planned Changes:**
-    * **Behavioral Pattern (Strategy):** Implement the **Strategy Pattern** to encapsulate energy algorithms into separate classes (`EcoStrategy`, `PartyStrategy`). This will allow the system to switch modes dynamically without modifying the core hub logic, satisfying the **Single Responsibility Principle**.
+### ⏳ Phase 3: Pricing Rules & Strategy Pattern (Planned)
+* **Context:** The `checkout` method contains hardcoded math for Student and Tuesday discounts, violating the Single Responsibility Principle.
+* **Goal:** Implement a **Behavioral Pattern (Strategy)**. Extract the discount math into a `PricingStrategy` interface with interchangeable classes (`StudentPricing`, `TuesdayPricing`) so new promotions can be added without modifying core logic.
 
 ## 👤 Author
 **Amir Tavassoli**
