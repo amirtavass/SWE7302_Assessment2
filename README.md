@@ -13,14 +13,16 @@ The original system was developed rapidly as a monolith. It manages movie format
 ![img.png](img.png)
 
 
-## 🏗 Refactoring Progress & Patterns
-This section tracks the modernization of the codebase.
+## 🏗 Progress & Patterns
 
-### 🚧 Phase 1: Ticket Instantiation & Factory Pattern (In Progress)
+
+### 🚧 Phase 1: Ticket Instantiation & Factory Pattern (Completed)
 * **Context:** The legacy `selectTicket` method uses hardcoded `if/else` logic to create standard or IMAX tickets.
 * **Goal:** Implement a **Creational Pattern (Factory Method)** to cleanly instantiate `ImaxTicket` or `StandardTicket` objects, removing rigid dependencies and adhering to the Open/Closed Principle.
 
-### ⏳ Phase 2: Dynamic Add-ons & Decorator Pattern (Planned)
+![img_1.png](img_1.png)
+
+### 🚧 Phase 2: Dynamic Add-ons & Decorator Pattern (In Progress)
 * **Context:** The `addExtra` method relies on fragile string comparisons to add 3D glasses or popcorn. Adding new snacks risks a "class explosion" or massive conditional blocks.
 * **Goal:** Implement a **Structural Pattern (Decorator)**. Create a base `ITicket` interface and wrap it dynamically with `PopcornDecorator` or `GlassesDecorator` to calculate prices seamlessly.
 
