@@ -1,7 +1,7 @@
 package com.cinema.modern;
 
 import com.cinema.modern.factory.TicketFactory;
-import com.cinema.modern.tickets.ITicket;
+import com.cinema.modern.core.ITicket;
 
 public class ModernMain {
     public static void main(String[] args) {

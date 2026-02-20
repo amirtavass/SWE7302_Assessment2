@@ -1,4 +1,4 @@
-package com.cinema.modern.tickets;
+package com.cinema.modern.core;
 
 public interface ITicket {
     String getDescription();

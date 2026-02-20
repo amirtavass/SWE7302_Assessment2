@@ -1,4 +1,4 @@
-package com.cinema.modern.tickets;
+package com.cinema.modern.core;
 
 public class StandardTicket implements ITicket {
     @Override
