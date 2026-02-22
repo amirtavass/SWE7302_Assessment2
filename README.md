@@ -22,13 +22,16 @@ The original system was developed rapidly as a monolith. It manages movie format
 
 ![img_1.png](img_1.png)
 
-### 🚧 Phase 2: Dynamic Add-ons & Decorator Pattern (In Progress)
-* **Context:** The `addExtra` method relies on fragile string comparisons to add 3D glasses or popcorn. Adding new snacks risks a "class explosion" or massive conditional blocks.
-* **Goal:** Implement a **Structural Pattern (Decorator)**. Create a base `ITicket` interface and wrap it dynamically with `PopcornDecorator` or `GlassesDecorator` to calculate prices seamlessly.
 
-### ⏳ Phase 3: Pricing Rules & Strategy Pattern (Planned)
-* **Context:** The `checkout` method contains hardcoded math for Student and Tuesday discounts, violating the Single Responsibility Principle.
-* **Goal:** Implement a **Behavioral Pattern (Strategy)**. Extract the discount math into a `PricingStrategy` interface with interchangeable classes (`StudentPricing`, `TuesdayPricing`) so new promotions can be added without modifying core logic.
+
+### ✅ Phase 2: Database Implementation (Singleton & DAO Patterns) (Completed)
+* **Context:** The system needed a reliable way to persist completed bookings and fetch available movies without cluttering the main application logic with SQL queries or risking multiple database connections.
+* **Goal:** Implemented the **Singleton Pattern** via `DatabaseHandler` to ensure only one active SQLite connection exists. Implemented the **Data Access Object (DAO) Pattern** via `BookingDAO` to separate database operations from the business logic, satisfying the Single Responsibility Principle.
+
+![img_2.png](img_2.png)
+
+### 🚧 Phase 3: Next Phases - Structural & Behavioral Patterns (In Progress)
+Now that the core ticket creation and database persistence are working, the next phase focuses on expanding the system's features dynamically.
 
 ## 👤 Author
 **Amir Tavassoli**
