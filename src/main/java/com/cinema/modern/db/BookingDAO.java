@@ -7,15 +7,17 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+//using same logic of workshop2
+
 public class BookingDAO {
     private DatabaseHandler db;
 
     public BookingDAO() {
-        // Obtains the Singleton database connection
+        //  SINGLETON DB CONNECTION
         this.db = DatabaseHandler.getInstance();
     }
 
-    // Reads the seeded movies from the database
+    // Reading seed data from the database
     public List<String> getAvailableMovies() {
         List<String> movies = new ArrayList<>();
         String sql = "SELECT title FROM movies";
@@ -32,7 +34,7 @@ public class BookingDAO {
         return movies;
     }
 
-    // Saves the finalized ticket details to the database
+    // Saving the final ticket details
     public void saveBooking(String ticketDesc, double totalPrice) {
         String sql = "INSERT INTO bookings(ticket_desc, total_price) VALUES(?, ?)";
 
@@ -43,6 +45,30 @@ public class BookingDAO {
             System.out.println("[DAO] Saved booking to database: " + ticketDesc + " | £" + totalPrice);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public void displayPreviousBookings() {
+        String sql = "SELECT * FROM bookings";
+
+        try (Statement stmt = db.getConnection().createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            System.out.println("\n--- Previous Bookings ---");
+            boolean hasBookings = false;
+
+            while (rs.next()) {
+                hasBookings = true;
+                System.out.printf("ID: %d | Details: %s | Total: £%.2f\n",
+                        rs.getInt("id"),
+                        rs.getString("ticket_desc"),
+                        rs.getDouble("total_price"));
+            }
+
+            if (!hasBookings) {
+                System.out.println("No bookings found in the database.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error fetching bookings: " + e.getMessage());
         }
     }
 }

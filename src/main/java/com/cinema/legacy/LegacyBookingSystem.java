@@ -8,7 +8,7 @@ public class LegacyBookingSystem {
     private double basePrice = 0.0;
     private double totalCost = 0.0;
 
-    // VIOLATION: Hardcoded object creation and pricing
+    //creating obj and pricing are hardcoded
     public void selectTicket(String screenType) {
         if (screenType.equalsIgnoreCase("Standard")) {
             basePrice = 10.00;
@@ -24,7 +24,7 @@ public class LegacyBookingSystem {
         System.out.println("Selected: " + bookingDetails.get(0) + " - £" + basePrice);
     }
 
-    // VIOLATION: String matching for add-ons (Class Explosion risk)
+    // add-ons are exposed
     public void addExtra(String extra) {
         if (extra.equalsIgnoreCase("3DGlasses")) {
             totalCost += 2.00;
@@ -37,7 +37,7 @@ public class LegacyBookingSystem {
         }
     }
 
-    // VIOLATION: Rigid discount rules embedded in checkout logic
+    //  discount rules are placed in checkout logic
     public double checkout(String discountCode) {
         double finalPrice = totalCost;
 

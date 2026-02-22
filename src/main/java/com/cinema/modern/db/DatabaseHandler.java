@@ -10,14 +10,14 @@ public class DatabaseHandler {
     private static DatabaseHandler instance;
     private Connection connection;
 
-    // Private constructor to prevent direct instantiation
+
     private DatabaseHandler() {
         try {
-            // Force Java to load the SQLite driver
+            // loading the SQLite
             Class.forName("org.sqlite.JDBC");
 
-            // Creates cinema.db file in the project root
-            String url = "jdbc:sqlite:cinema.db";
+
+            String url = "jdbc:sqlite:cinema_v2.db";
             this.connection = DriverManager.getConnection(url);
             System.out.println("SQL Connection Established");
             initializeTables();
@@ -29,7 +29,7 @@ public class DatabaseHandler {
         }
     }
 
-    // Public method to get the single instance
+
     public static DatabaseHandler getInstance() {
         if (instance == null) {
             instance = new DatabaseHandler();
@@ -38,7 +38,7 @@ public class DatabaseHandler {
     }
 
     private void initializeTables() {
-        // Safety check: Don't try to make tables if the connection failed
+
         if (connection == null) return;
 
         String createMoviesTable = "CREATE TABLE IF NOT EXISTS movies (" +
@@ -56,12 +56,18 @@ public class DatabaseHandler {
             stmt.execute(createMoviesTable);
             stmt.execute(createBookingsTable);
 
-            // Seed the database with movies if it's empty
+            // reading from our seed data if movies was empty
             String countMovies = "SELECT COUNT(*) AS count FROM movies";
             var rs = stmt.executeQuery(countMovies);
             if (rs.next() && rs.getInt("count") == 0) {
-                stmt.execute("INSERT INTO movies (title) VALUES ('Dune: Part Two'), ('Oppenheimer'), ('Spider-Man: Across the Spider-Verse')");
-                System.out.println("Seeded database with initial movies.");
+                stmt.execute("INSERT INTO movies (title) VALUES " +
+                        "('Dune: Part Two'), " +
+                        "('Oppenheimer'), " +
+                        "('Spider-Man: Across the Spider-Verse'), " +
+                        "('The Matrix Remastered'), " +
+                        "('Interstellar (IMAX Re-release)'), " +
+                        "('Avatar: The Way of Water')");
+                System.out.println("default(seed) data inserted into movies table.");
             }
             System.out.println("Tables initialized successfully.");
         } catch (SQLException e) {
