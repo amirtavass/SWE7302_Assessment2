@@ -1,4 +1,4 @@
-# StarScreen Ticket Manager 🍿 v2.1
+# StarScreen Ticket Manager 🍿 v2.2
 
 **Assessment 2: Advanced Software Development (SWE7302)**
 
@@ -37,10 +37,17 @@ The original(legacy) system was built as a single ,coupled design. It manages th
 
 ![img_3.png](img_3.png)
 
-### 🚧 Phase 4: Pricing Rules & Strategy Pattern (In Progress)
+### ✅ Phase 4: Pricing Rules & Strategy Pattern (Completed)
 Now that the core ticket creation, dynamic snacks, and database persistence are working, the next phase focuses on flexible pricing.
-* **Context:** The legacy `checkout` method contains hardcoded math for Student and Tuesday discounts, violating the Single Responsibility Principle and Open/Closed Principle.
-* **Goal:** Implement a **Behavioral Pattern (Strategy)**. Extract the discount math into a `PricingStrategy` interface with interchangeable classes (`StudentPricingStrategy`, `NoDiscountStrategy`) so new promotional rules can be added dynamically without modifying the core checkout logic.
+* **Context:** The legacy `checkout` method contains hardcoded math for Student discounts, violating the Single Responsibility Principle and Open/Closed Principle.
+* **Goal:** Implemented a **Behavioral Pattern (Strategy)**. Extracted the discount math into a `PricingStrategy` interface with interchangeable classes (`StudentStrategy`, `RegularPricingStrategy`) so new promotional rules can be added dynamically without modifying the core checkout logic.
+
+![img_4.png](img_4.png)
+
+
+### ✅ Phase 5: System Decoupling & Facade Pattern (Completed)
+* **Context:** The console UI (`ModernMain`) was becoming tightly coupled to multiple design pattern implementations (Factory, Decorator, Strategy) and the Database DAO, making it difficult to eventually migrate to a modern Web UI.
+* **Goal:** Implemented a **Structural Pattern (Facade)** via `CinemaApiFacade`. This provides a single, simplified API entry point for booking tickets, hiding the complex subsystem logic. This cleanly separates the backend business rules from the frontend, perfectly preparing the application for an HTML/CSS/JS web integration.
 
 ## 👤 Author
 **Amir Tavassoli**
