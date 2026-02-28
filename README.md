@@ -1,4 +1,4 @@
-# StarScreen Ticket Manager 🍿 v2.2
+# StarScreen Ticket Manager 🍿 v2.3
 
 **Assessment 2: Advanced Software Development (SWE7302)**
 
@@ -48,6 +48,11 @@ Now that the core ticket creation, dynamic snacks, and database persistence are 
 ### ✅ Phase 5: System Decoupling & Facade Pattern (Completed)
 * **Context:** The console UI (`ModernMain`) was becoming tightly coupled to multiple design pattern implementations (Factory, Decorator, Strategy) and the Database DAO, making it difficult to eventually migrate to a modern Web UI.
 * **Goal:** Implemented a **Structural Pattern (Facade)** via `CinemaApiFacade`. This provides a single, simplified API entry point for booking tickets, hiding the complex subsystem logic. This cleanly separates the backend business rules from the frontend, perfectly preparing the application for an HTML/CSS/JS web integration.
+
+### ✅ Phase 6: Post-Booking Events & Observer Pattern (Completed)
+* **Context:** After a successful booking, the system needed to trigger secondary processes (like sending confirmation emails and tracking daily revenue). Hardcoding these steps into the core booking flow would violate the Single Responsibility Principle and create rigid, coupled code.
+* **Goal:** Implemented a **Behavioral Pattern (Observer)**. Created a `BookingEventManager` (Publisher) and distinct listener classes (`EmailNotificationService`, `RevenueTracker`). When a ticket is booked, the Facade notifies the event manager, which automatically triggers all subscribed observers and collects their logs for the UI. This establishes an event-driven architecture, allowing new post-booking features to be added without modifying the core system.
+
 
 ## 👤 Author
 **Amir Tavassoli**
