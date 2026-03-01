@@ -1,3 +1,11 @@
+/**
+ * The goal of API Facade for the cinema booking system.
+ * This class sits between the user interface and the core business logic.
+ * It hides all the messy details (database calls, ticket creation, pricing rules,
+ * and event notifications) behind a simple, clean API.
+ */
+
+
 package com.cinema.modern.api;
 
 import com.cinema.modern.db.BookingDAO;
@@ -36,11 +44,13 @@ public class CinemaApiFacade {
     }
 
     public String bookTicket(String movieName, String ticketType, boolean wantsPopcorn, boolean wantsGlasses, boolean isStudent) {
+        //Creational&Structural&Behavioral patterns
 
-        // Create the ticket using the Factory pattern (Creational: Factory)
+
+        // Creating the ticket using the Factory pattern (Creational: Factory)
         ITicket ticket = TicketFactory.createTicket(ticketType);
 
-        // Decorate the ticket with optional add-ons (Structural: Decorator)
+        // Decorating the ticket with add-ons (Structural: Decorator)
         if (wantsPopcorn) {
             ticket = new PopcornDecorator(ticket);
         }
@@ -48,15 +58,15 @@ public class CinemaApiFacade {
             ticket = new GlassesDecorator(ticket);
         }
 
-        // Apply the appropriate pricing strategy (Behavioral: Strategy)
+        // Applying the pricing strategy (Behavioral: Strategy)
         PricingStrategy pricingStrategy = isStudent ? new StudentStrategy() : new RegularPricingStrategy();
         double finalPrice = pricingStrategy.calculateFinalPrice(ticket.getPrice());
         String description = ticket.getDescription() + " [" + pricingStrategy.getDiscountDescription() + "] for '" + movieName + "'";
 
-        //isolate database logic from business logic(Persistence: DAO)
+        //isolating database logic from business logic(Persistence: DAO)
         bookingDAO.saveBooking(description, finalPrice);
 
-        // Notify all subscribed observers about the new booking (Behavioral: Strategy)
+        // in here it notifies all subscribed observers about the new booking (Behavioral: Strategy)
         List<String> observerLogs = eventManager.notifySubscribers(description, finalPrice);
 
 

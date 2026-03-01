@@ -8,7 +8,7 @@ public class LegacyBookingSystem {
     private double basePrice = 0.0;
     private double totalCost = 0.0;
 
-    //creating obj and pricing are hardcoded
+    //creating obj and pricing are hardcoded in legacy mode
     public void selectTicket(String screenType) {
         if (screenType.equalsIgnoreCase("Standard")) {
             basePrice = 10.00;
@@ -37,7 +37,7 @@ public class LegacyBookingSystem {
         }
     }
 
-    //  discount rules are placed in checkout logic
+    //  discount rules are placed in checkout logic which should be separated
     public double checkout(String discountCode) {
         double finalPrice = totalCost;
 

@@ -2,6 +2,10 @@ package com.cinema.modern.decorator;
 
 import com.cinema.modern.core.ITicket;
 
+/**
+ * in here we add the popcorn add-on as an optional add-on to a ticket using decorator pattern
+ */
+
 public class PopcornDecorator extends TicketDecorator {
     public PopcornDecorator(ITicket ticket) {
         super(ticket);

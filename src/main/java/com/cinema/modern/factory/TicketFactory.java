@@ -4,6 +4,10 @@ import com.cinema.modern.core.ITicket;
 import com.cinema.modern.core.ImaxTicket;
 import com.cinema.modern.core.StandardTicket;
 
+/**
+ * TicketFactory file Creates the correct ticket instance based on the given type using Factory pattern
+ */
+
 public class TicketFactory {
 
 

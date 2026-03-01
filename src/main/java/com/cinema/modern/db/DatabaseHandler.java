@@ -1,3 +1,8 @@
+/**
+*Just like the workshop project,this file handles the Java Database Connectivity setup
+ */
+
+
 package com.cinema.modern.db;
 
 import java.sql.Connection;
@@ -13,7 +18,7 @@ public class DatabaseHandler {
 
     private DatabaseHandler() {
         try {
-            // loading the SQLite
+            // loading the SQLite db
             Class.forName("org.sqlite.JDBC");
 
 

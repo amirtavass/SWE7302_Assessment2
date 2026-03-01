@@ -10,13 +10,12 @@ public class ModernMain {
         CinemaApiFacade api = new CinemaApiFacade();
 
         while (true) {
-            System.out.println("\n====================================");
-            System.out.println("   🎬 StarScreen Cinema Manager 🎬   ");
-            System.out.println("====================================");
-            System.out.println("1. Book a Ticket");
-            System.out.println("2. View Previous Bookings");
-            System.out.println("3. Exit System");
-            System.out.print("Please select an option (1-3): ");
+
+            System.out.println("    StarScreen Cinema Manager    ");
+            System.out.println("1.Book a Ticket");
+            System.out.println("2.View Previous Bookings");
+            System.out.println("3.Exit System");
+            System.out.print("Please select an option from 1 to 3: ");
 
             String menuChoice = scanner.nextLine().trim();
 
@@ -24,14 +23,14 @@ public class ModernMain {
                 api.showPreviousBookings();
                 continue;
             } else if (menuChoice.equals("3")) {
-                System.out.println("Exiting system. Goodbye!");
+                System.out.println("Exiting system...goodbye!");
                 break;
             } else if (!menuChoice.equals("1")) {
-                System.out.println("❌ Invalid choice. Please try again.");
+                System.out.println("Wrong choice,Please try again.");
                 continue;
             }
 
-            // Collect user choices from the terminal
+
             System.out.println("\nCurrently Showing:");
             List<String> movies = api.getAvailableMovies();
             for (int i = 0; i < movies.size(); i++) {
@@ -43,12 +42,12 @@ public class ModernMain {
             try {
                 movieChoice = Integer.parseInt(scanner.nextLine().trim());
             } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid input. Please enter a valid number. Returning to menu.");
+                System.out.println("Wrong input. Please enter a number between the options.");
                 continue;
             }
 
             if (movieChoice < 1 || movieChoice > movies.size()) {
-                System.out.println("❌ Invalid selection. Returning to menu.");
+                System.out.println("Wrong input. Please enter a number between the options.");
                 continue;
             }
             String selectedMovie = movies.get(movieChoice - 1);
@@ -57,14 +56,14 @@ public class ModernMain {
             String ticketType = getTicketTypeInput(scanner);
 
             // ONLY YES/NO VALIDATION
-            boolean wantsPopcorn = getYesNoInput(scanner, "\nAdd Large Popcorn for £6.50? (Y/N): ");
+            boolean wantsPopcorn = getYesNoInput(scanner, "\nAdd a Large Popcorn for £6.50? (Y/N): ");
             boolean wantsGlasses = getYesNoInput(scanner, "Add 3D Glasses for £2.00? (Y/N): ");
             boolean isStudent = getYesNoInput(scanner, "\nAre you a Student? (20% Discount) (Y/N): ");
 
             // central entry point for booking workflow(Facade Pattern)
             String result = api.bookTicket(selectedMovie, ticketType, wantsPopcorn, wantsGlasses, isStudent);
 
-            System.out.println("\n--- Booking Result ---");
+            System.out.println("\n Booking Result");
             System.out.println(result);
         }
         scanner.close();
@@ -73,8 +72,8 @@ public class ModernMain {
     //VALIDATION FOR CHOICES
     private static String getTicketTypeInput(Scanner scanner) {
         while (true) {
-            System.out.println("\nTicket Types: 1. Standard (£10.00) | 2. IMAX (£15.00)");
-            System.out.print("Enter choice (1 or 2): ");
+            System.out.println("\nTicket options: 1. Standard ticket(£10.00) | 2. IMAX ticket (£15.00)");
+            System.out.print("Choose between 1 or 2: ");
             String input = scanner.nextLine().trim();
 
             if (input.equals("1")) {
@@ -83,7 +82,7 @@ public class ModernMain {
                 return "IMAX";
             }
 
-            System.out.println("❌ Invalid input. Please type '1' for Standard or '2' for IMAX.");
+            System.out.println("Wrong input. Please type '1' for Standard ticket or '2' for IMAX ticket.");
         }
     }
 
@@ -99,7 +98,7 @@ public class ModernMain {
                 return false;
             }
 
-            System.out.println("❌ Invalid input. Please type 'Y' for Yes or 'N' for No.");
+            System.out.println("Wrong input. Please type either 'Y' for Yes and 'N' for No.");
         }
     }
 }
