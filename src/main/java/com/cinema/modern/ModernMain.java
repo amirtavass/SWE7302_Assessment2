@@ -3,6 +3,8 @@ package com.cinema.modern;
 import com.cinema.modern.api.CinemaApiFacade;
 import java.util.List;
 import java.util.Scanner;
+import com.cinema.modern.builder.TicketBuilder;
+import com.cinema.modern.core.ITicket;
 
 public class ModernMain {
     public static void main(String[] args) {
@@ -61,7 +63,41 @@ public class ModernMain {
             boolean isStudent = getYesNoInput(scanner, "\nAre you a Student? (20% Discount) (Y/N): ");
 
             // central entry point for booking workflow(Facade Pattern)
-            String result = api.bookTicket(selectedMovie, ticketType, wantsPopcorn, wantsGlasses, isStudent);
+            /*
+              LEGACY APPROACH:
+              *In the legacy version, ticket options were passed as multiple separate parameters to the API.
+              *If we added for example Soda add on, we'd have to change the method entirely in the API and it would break every other class using it.
+            */
+
+
+            //String result = api.bookTicket(selectedMovie, ticketType, wantsPopcorn, wantsGlasses, isStudent);
+
+
+            /*
+              BUILDER PATTERN:
+              *The new version uses the Builder Pattern to make the ticket object step by step.
+              *This improves readability of our code and keeps the API clean by passing a single object instead of multiple parameters.
+             */
+
+            //first we create the Builder
+            TicketBuilder builder = new TicketBuilder();
+
+            //then we Configure the ticket type
+            builder.setType(ticketType); // "Standard" or "IMAX"
+
+            //adding add ons after that
+            if (wantsPopcorn) {
+                builder.addPopcorn();
+            }
+            if (wantsGlasses) {
+                builder.addGlasses();
+            }
+
+            //finally we Build the final object
+            ITicket ticket = builder.build();
+
+            //in the end we just Pass the object to the API
+            String result = api.bookTicket(ticket, selectedMovie, isStudent);
 
             System.out.println("\n Booking Result");
             System.out.println(result);
