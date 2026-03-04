@@ -79,13 +79,13 @@ To move beyond a basic console application, a modern JavaFX GUI was developed (`
 
 ![img_8.png](img_8.png)
 * **Step 2: Customizing the ticket(triggering the `TicketBuilder` to create the ticket obj and the decorator pattern for add-ons).**
-* ![img_9.png](img_9.png)
+![img_9.png](img_9.png)
 
 * **Step 3: Payment & Discount (This step activates the Behavioral `PricingStrategy`).**
-* ![img_10.png](img_10.png)
-* 
+![img_10.png](img_10.png)
+
 * **Step 4: Confirmation (showing the final receipt and system logs).**
-* ![img_11.png](img_11.png)
+![img_11.png](img_11.png)
 
 
 
