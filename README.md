@@ -1,18 +1,18 @@
-# StarScreen Ticket Manager 🍿 v2.4
+# StarScreen Ticket Manager v3
 
 **Assessment 2: Advanced Software Development (SWE7302)**
 
-## 📋 Project Overview
+## Project Overview
 StarScreen Ticket Manager is an educational project that shows how to refactor poorly designed legacy code into a modern, maintainable architecture using design patterns.
 
 The original(legacy) system was built as a single,coupled design. It manages the logic of the project all within a single  class using  `if-else` chains. This project serves as a "before and after" showcase, the transformation into a modular, scalable architecture.
 
-### 🛑 The "Before" State: Legacy Code
+### The "Before" State: Legacy Code
 
 ![img.png](img.png)
 
 
-## 🏗 Progress & Patterns
+## Progress & Patterns
 
 
 ### Phase 1:Changing hardcoded legacy version into modern Instantiation using Factory Pattern (Completed)
@@ -73,10 +73,25 @@ After the booking was completed,I wanted to add additional actions such as:Sendi
 * **Testing2:** after fixing the pricing issue the test for the dashboard is successful.only couple of warnings remain which are caused by java versions.
 ![img_7.png](img_7.png)
 
+### Phase 8: Graphical User Interface(GUI) & FINAL TESTING (Completed)
+To move beyond a basic console application, a modern JavaFX GUI was developed (`CinemaDashboard`).The UI was created using the `Wizard Design Pattern`,breaking bookings into steps and allowing users to navigate through the process.
+* **Step 1: Movie Selection(loading of available movies using the Facade).**
+
+![img_8.png](img_8.png)
+* **Step 2: Customizing the ticket(triggering the `TicketBuilder` to create the ticket obj and the decorator pattern for add-ons).**
+* ![img_9.png](img_9.png)
+
+* **Step 3: Payment & Discount (This step activates the Behavioral `PricingStrategy`).**
+* ![img_10.png](img_10.png)
+* 
+* **Step 4: Confirmation (showing the final receipt and system logs).**
+* ![img_11.png](img_11.png)
+
+
 
 ## 👤 Author
 **Amir Tavassoli**
-MSc Software Engineering | University of Bolton
+MSc Software Engineering | University of Greater Manchester
 
 ## 📄 License
 This is an educational project created for portfolio and assessment purposes.
