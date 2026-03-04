@@ -1,11 +1,11 @@
-# StarScreen Ticket Manager 🍿 v2.3
+# StarScreen Ticket Manager 🍿 v2.4
 
 **Assessment 2: Advanced Software Development (SWE7302)**
 
 ## 📋 Project Overview
 StarScreen Ticket Manager is an educational project that shows how to refactor poorly designed legacy code into a modern, maintainable architecture using design patterns.
 
-The original(legacy) system was built as a single ,coupled design. It manages the logic of the project all within a single  class using  `if-else` chains. This project serves as a "before and after" showcase, the transformation into a modular, scalable architecture.
+The original(legacy) system was built as a single,coupled design. It manages the logic of the project all within a single  class using  `if-else` chains. This project serves as a "before and after" showcase, the transformation into a modular, scalable architecture.
 
 ### 🛑 The "Before" State: Legacy Code
 
@@ -15,49 +15,63 @@ The original(legacy) system was built as a single ,coupled design. It manages th
 ## 🏗 Progress & Patterns
 
 
-###  Phase 1: Ticket Instantiation & Factory Pattern (Completed)
-* **Background:** The legacy `selectTicket` method used hardcoded `if/else` logic to create standard or IMAX tickets.
-* **Goal:** Introduce a **Creational Pattern (Factory Method)** to cleanly create `ImaxTicket` or `StandardTicket` objects in a clean manner that eliminates strict dependencies and the Open/Closed Principle.
+### Phase 1:Changing hardcoded legacy version into modern Instantiation using Factory Pattern (Completed)
+* **Context:** The legacy `selectTicket` method used hardcoded `if/else` logic to create tickets.
+* **Implementation:** I introduced a **Creational Pattern (Factory Method)** to create `ImaxTicket` or `StandardTicket` objects in a clean manner that eliminates dependencies and the Open/Closed Principle.
 
 ![img_1.png](img_1.png)
 
 
 
-###  Phase 2: Database Implementation (Singleton & DAO Patterns) (Completed)
-* **Background:** The system required a stable method to store the bookings completed and retrieve the movies available without causing any mess on the main application code with SQL queries or exposing the system to numerous connections with the database.
-* **Goal:** An implementation of the Singleton Pattern through DatabaseHandler to make sure that there should be only one active SQLite connection. Enacted the Data Access Object (DAO) Pattern through BookingDAO in order to decouple database transactions and business logic, which met the Single Responsibility Principle.
+### Phase 2:Adding Database to the project (using Singleton & DAO Patterns) (Completed)
+* **by implementing the Singleton Pattern through DatabaseHandler I made sure that there should be only ONE active SQLite connection.I used the Data Access Object (DAO) Pattern by creating `BookingDAO` so that all database operations are handled separately from the business logic. This keeps each class focused on one responsibility and follows the Single Responsibility Principle.
 
 ![img_2.png](img_2.png)
 
 
-###  Phase 3: Dynamic Add-ons (Decorator Pattern) & Interactive Menu (Completed)
+### Phase 3:Adding dynamic Add-ons (Decorator Pattern) and making menu interactive (Completed)
 
-* **Background:** `addExtra` method legacy was based on comparison of the strings that was not that strong and it added 3D glasses or popcorn. There was the danger of creating a class explosion or colossal conditional blocks when the new snacks were added. Moreover, the UI did not provide an opportunity to see past data.
-* **Goal:** Structural Pattern (Decorator) was put in place. Developed a layer `TicketDecorator` and dynamically encased it with `PopcornDecorator` and `GlassesDecorator` to compute prices without any modification of the main  `ITicket`  implementations. Also, modified the main application loop to add an interactive menu which reconstructs and lists the past database bookings.
+* **Background:** `addExtra` method in the legacy version was using string-based conditionals to add extras ,which was fragile.
+* **Purpose:** Structural Pattern (Decorator) was put in place. To improve flexibility, the Decorator Pattern was implemented using `TicketDecorator` and dynamically wrapped tickets with `PopcornDecorator` and `GlassesDecorator`.
 
 
 
 ![img_3.png](img_3.png)
 
 ### Phase 4: Pricing Rules & Strategy Pattern (Completed)
-Since the core ticket creation, dynamic snacks, and database persistence have been made to work, the next step involves the flexible pricing.
-* **Background:** Hard coded mathematics to `checkout` Student discounts in the legacy checkout method are a violation of the Single Responsibility Principle and Open/Closed Principle.
-* **Goal:** Adopted a Behavior Pattern (Strategy). Moved the math of the discounts into a `PricingStrategy` interface which can be configured to use different classes (`StudentStrategy`, `RegularPricingStrategy`) to permit the addition of new promotion rules without necessarily changing the fundamental checkout logic.
+In the legacy version, student discounts were calculated directly inside the checkout method using hard-coded logic.
+This caused two main issues:
+* **Issue1:** It violated the `Single Responsibility Principle` because the `checkout` method was handling both the booking process and pricing logic.
+* **Issue2:** It violated the `Open/Closed Principle` because every time we wanted to introduce a new promotion or discount rule, we had to modify the existing checkout code.
+* **Refactored Solution:** by Adopting a Behavior Pattern (Strategy) I Moved the math of the discounts into a `PricingStrategy` interface created separate implementations such as (`StudentStrategy`, `RegularPricingStrategy`).Now,the checkout process simply uses a pricing strategy without knowing the details of how the price is calculated.
 
 
 ![img_4.png](img_4.png)
 
 
-### ✅ Phase 5: System Decoupling & Facade Pattern (Completed)
-* **Background:** The console UI (`ModernMain) was becoming extremely bound to various design pattern implementations (Factory, Decorator, Strategy) and the Database DAO and it was hard to eventually migrate to a modern Web UI.
-* **Goal:** Took effect a Structural Pattern (Facade) through `CinemaApiFacade`. This gives one simple API entry point with which to book tickets, obscuring the underlying complex subsystem logic. This neatly segregates the business-logic of the back end and the front end, in the best possible way to present the application to an HTML/CSS/JS web integration.
+### Phase 5: System Decoupling & Facade Pattern (Completed)
+As more design patterns were introduced (Factory, Decorator, Strategy, DAO), the ModernMain console class became coupled.
+This created one huge issue:
+* **Issue:** The console UI (`ModernMain) was involved with pattern implementations (Factory, Decorator, Strategy) and the Database DAO and it would make it difficult to migrate to a modern Web UI.
+* **Solution:** To address this, I implemented the `Facade Pattern` by introducing `CinemaApiFacade`. This class acts as a single, simple entry point for the system.now the UI only needs to call the Facade and the system will handle the rest.
 
 
-### ✅ Phase 6: Post-Booking Events & Observer Pattern (Completed)
-* **Background:** Once a successful booking was made the system had to activate other processes (such as confirmation email and day to day revenue tracking). Coding these steps into the main booking process would be a violation of the Single Responsibility Principle as well as produce rigid and coupled code.
-* **Goal:** Adopted a Behavioral Pattern (Observer). Developed a `BookingEventManager` (Publisher) and separate listener classes (`EmailNotificationService`, `RevenueTracker`). Once a ticket is booked, the Facade will inform the event manager, and all observers who were subscribed will be notified automatically and their logs are gathered to the UI. This creates an event-driven architecture, which enables post-booking feature additions without changing the core system.
+### Phase 6: Post-Booking Events & Observer Pattern (Completed)
+After the booking was completed,I wanted to add additional actions such as:Sending confirmation emails.
+* **Possible problem:** If these actions were coded directly inside the booking process, it would Violate the `Single Responsibility Principle` and also it would create a tight coupling.
+* **Goal:** To solve this I adopted a Behavioral Pattern (Observer) and created a `BookingEventManager` (Publisher) and separate listener classes such as `EmailNotificationService`.
 
 ![img_5.png](img_5.png)
+
+
+### Phase 7:Adding testing using jupiter for both database connection and dashboard(Completed)
+* **Background:** The legacy system was not tested and it was not possible to add new features without breaking the existing tests.
+* **Goal:** Added unit tests for the database connection and the dashboard.
+* **Testing1:** as shown below at first the test for the database connection is successful but pricing is not working as expected.
+![img_6.png](img_6.png)
+
+* **Testing2:** after fixing the pricing issue the test for the dashboard is successful.only couple of warnings remain which are caused by java versions.
+![img_7.png](img_7.png)
 
 
 ## 👤 Author

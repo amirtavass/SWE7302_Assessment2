@@ -8,6 +8,6 @@ public class RegularPricingStrategy implements PricingStrategy {
 
     @Override
     public String getDiscountDescription() {
-        return "Standard Pricing";
+        return "Regular Adult";
     }
 }

@@ -1,3 +1,5 @@
+//withut this file javafx won't have the permission to look into our ui package and launch the application
+
 module com.cinema.modern {
     requires java.sql;
     requires javafx.controls;
