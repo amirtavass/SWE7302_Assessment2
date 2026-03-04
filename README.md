@@ -68,9 +68,13 @@ After the booking was completed,I wanted to add additional actions such as:Sendi
 * **Background:** The legacy system was not tested and it was not possible to add new features without breaking the existing tests.
 * **Goal:** Added unit tests for the database connection and the dashboard.
 * **Testing1:** as shown below at first the test for the database connection is successful but pricing is not working as expected.
+
+
 ![img_6.png](img_6.png)
 
 * **Testing2:** after fixing the pricing issue the test for the dashboard is successful.only couple of warnings remain which are caused by java versions.
+
+
 ![img_7.png](img_7.png)
 
 ### Phase 8: Graphical User Interface(GUI) & FINAL TESTING (Completed)
@@ -78,13 +82,20 @@ To move beyond a basic console application, a modern JavaFX GUI was developed (`
 * **Step 1: Movie Selection(loading of available movies using the Facade).**
 
 ![img_8.png](img_8.png)
+
+
 * **Step 2: Customizing the ticket(triggering the `TicketBuilder` to create the ticket obj and the decorator pattern for add-ons).**
+
+
 ![img_9.png](img_9.png)
 
 * **Step 3: Payment & Discount (This step activates the Behavioral `PricingStrategy`).**
+
+
 ![img_10.png](img_10.png)
 
 * **Step 4: Confirmation (showing the final receipt and system logs).**
+
 ![img_11.png](img_11.png)
 
 
