@@ -77,6 +77,8 @@ After the booking was completed,I wanted to add additional actions such as:Sendi
 
 ![img_7.png](img_7.png)
 
+![img_12.png](img_12.png)
+
 ### Phase 8: Graphical User Interface(GUI) & FINAL TESTING (Completed)
 To move beyond a basic console application, a modern JavaFX GUI was developed (`CinemaDashboard`).The UI was created using the `Wizard Design Pattern`,breaking bookings into steps and allowing users to navigate through the process.
 * **Step 1: Movie Selection(loading of available movies using the Facade).**
